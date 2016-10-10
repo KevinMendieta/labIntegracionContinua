@@ -67,7 +67,8 @@ public class MyBatisExample {
 
         SqlSession sqlss = sessionfact.openSession();
 
-        
+        EntradaForoMapper entrada=sqlss.getMapper(EntradaForoMapper.class);
+        System.out.println(entrada.getEntradasForo());
         
         sqlss.commit();
         

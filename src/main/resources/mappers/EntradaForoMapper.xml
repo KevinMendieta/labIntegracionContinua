@@ -4,31 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.EntradaForoMapper">
-    <select id="getEntradasForo" resultMap="EntradaForoResult">
-        select ef.id as ef_id , ef.fecha_hora as ef_fecha_hora, ef.contenido as ef_contenido , cm.id as cm_id, cm.fecha_hora as cm_fecha_hora, cm.contenido as cm_contenido, autor.nombre as autor_nombre, autor.email as autor_email, autorcom.nombre as cm_nombre,  autorcom.email as cm_email
-        from ENTRADAS_FOROS as ef 
-        INNER JOIN COMENTARIOS as cm ON ef.'id' = cm.'ENTRADAS_FOROS_id' 
-        INNER JOIN USUARIOS as autor ON autor.email=ef.USUARIOS_email
-        INNER JOIN USUARIOS as autorcom ON autorcom.email=cm.USUARIOS_email
-    </select>
-    <resultMap type= 'EntradaForo' id= 'EntradaForoResut'>
+    
+    <resultMap type= 'EntradaForo' id= 'EntradaForoResult'>
         <id property = 'identificador' column ='id'/>
-        <association property = 'autor' javaType ='Usuario'columnPrefix='ef_'></association>
-        <result property = 'comentario' column ='Contenido'/>
-        <result property = 'titulo' column ='Contenido'/>
-        <result property = 'fechayHora' column ='Fecha_Hora'/>
-        <collection property='autor' ofType='Comentario'resultMap='ComentarioResult'columnPrefix='ef_'></collection>
+        <result property = 'comentario' column ='contenido'/>
+        <result property = 'titulo' column ='contenido'/>
+        <result property = 'fechayHora' column ='fecha_hora'/>
+        <association property = 'autor' javaType ='Usuario' ></association>
+        <collection property='respuestas' ofType='Comentario' columnPrefix='cm_' resultMap='ComentarioResult'></collection>
     </resultMap>
     
     <resultMap type= 'Comentario' id= 'ComentarioResult'>
-        <association property = 'autor' javaType ='Usuario' columnPrefix='cm_'></association>
-        <result property = 'comentario' column ='Contenido' />
-        <result property = 'fechayHora' column ='Fecha_Hora'/>
+        <result property = 'contenido' column ='contenido' />
+        <result property = 'fechayHora' column ='fecha_hora'/>
+        <association property = 'autor' columnPrefix='autor_' javaType ='Usuario' ></association>
     </resultMap>
     
-    <resultMap type= 'Usuario' id= 'UsuariosResult'>
-        <association property = 'autor' javaType ='Usuario'columnPrefix='autor_'></association>
-        <result property = 'email' column ='Email'/>
-    </resultMap>   
+    <resultMap type= 'Usuario' id= 'UsuarioResult'>
+        <id property = 'email' column ='email'/>
+        <result property = 'nombre' column ='nombre'/>
+
+    </resultMap> 
+    
+    <select id="getEntradasForo" resultMap="EntradaForoResult">
+        select ef.id, ef.fecha_hora, ef.contenido, cm.id as cm_id, cm.fecha_hora as cm_fecha_hora, cm.contenido as cm_contenido, autor.nombre as nombre, autor.email as email, autorcom.nombre as autor_nombre,  autorcom.email as autor_email
+        from ENTRADAS_FOROS as ef 
+        INNER JOIN COMENTARIOS as cm ON ef.`id` = cm.`ENTRADAS_FOROS_id` 
+        INNER JOIN USUARIOS as autor ON autor.email=ef.USUARIOS_email
+        INNER JOIN USUARIOS as autorcom ON autorcom.email=cm.USUARIOS_email
+    </select>  
   	
 </mapper>
