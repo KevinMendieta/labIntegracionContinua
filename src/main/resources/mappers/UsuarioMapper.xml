@@ -5,12 +5,12 @@
   
 <mapper namespace="edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.UsuarioMapper">
     
-    <resultMap type= 'Usuario' id= 'UsuariosResult'>
+    <resultMap type= 'Usuario' id= 'UsuarioResult'>
         <id property = 'email' column ='email'/>
         <result property = 'nombre' column ='nombre'/>
     </resultMap>
     
-    <select id="getUsuario" resultMap="UsuarioResult">
+    <select id="getUsuario" resultMap="UsuarioResult" parameterType="map">
         Select email,nombre
         From Usuarios
         Where email=#{emailusuario}
