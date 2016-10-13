@@ -30,9 +30,24 @@
         select ef.id, ef.fecha_hora, ef.contenido, cm.id as cm_id, cm.fecha_hora as cm_fecha_hora, cm.contenido as cm_contenido, 
         autor.nombre as autor_nombre, autor.email as autor_email, autorcom.nombre as cm_autorcm_nombre,  autorcom.email as cm_autorcm_email
         from ENTRADAS_FOROS as ef 
-        INNER JOIN COMENTARIOS as cm ON ef.`id` = cm.`ENTRADAS_FOROS_id` 
+        LEFT JOIN COMENTARIOS as cm ON ef.`id` = cm.`ENTRADAS_FOROS_id` 
         INNER JOIN USUARIOS as autor ON autor.email=ef.USUARIOS_email
-        INNER JOIN USUARIOS as autorcom ON autorcom.email=cm.USUARIOS_email
-    </select>  
-  	
+        LEFT JOIN USUARIOS as autorcom ON autorcom.email=cm.USUARIOS_email
+    </select>
+    
+    <select id="getEntradaForo" resultMap="EntradaForoResult" parameterType="map">
+        select ef.id, ef.fecha_hora, ef.contenido, cm.id as cm_id, cm.fecha_hora as cm_fecha_hora, cm.contenido as cm_contenido, 
+        autor.nombre as autor_nombre, autor.email as autor_email, autorcom.nombre as cm_autorcm_nombre,  autorcom.email as cm_autorcm_email
+        from ENTRADAS_FOROS as ef 
+        LEFT JOIN COMENTARIOS as cm ON ef.`id` = cm.`ENTRADAS_FOROS_id` 
+        INNER JOIN USUARIOS as autor ON autor.email=ef.USUARIOS_email
+        LEFT JOIN USUARIOS as autorcom ON autorcom.email=cm.USUARIOS_email
+        Where ef.id=#{identrada}
+    </select>
+    
+    <insert id="addToEntradaForo" parameterType="map">
+        INSERT INTO COMENTARIOS (fecha_hora,contenido,entradas_foros_id,usuarios_email)
+        VALUES (#{comentario.getFechayHora()},#{comentario.getContenido()},#{identrada},#{comentario.getAutor().getEmail()})
+    </insert>
+    
 </mapper>
