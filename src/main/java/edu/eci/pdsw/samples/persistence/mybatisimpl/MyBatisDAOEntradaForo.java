@@ -39,12 +39,16 @@ public class MyBatisDAOEntradaForo implements DaoEntradaForo{
         
     @Override
     public EntradaForo load(int id) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntradaForoMapper foromapper = currentSession.getMapper(EntradaForoMapper.class);
+        return foromapper.getEntradaForo(id);
     }
 
     @Override
     public List<EntradaForo> loadAll() throws PersistenceException {
-        return currentSession.getMapper(EntradaForoMapper.class).getEntradasForo();
+        //return currentSession.getMapper(EntradaForoMapper.class).getEntradasForo();
+        EntradaForoMapper foromapper=currentSession.getMapper(EntradaForoMapper.class);
+        return foromapper.getEntradasForo();
     }
 
     @Override
@@ -59,7 +63,9 @@ public class MyBatisDAOEntradaForo implements DaoEntradaForo{
 
     @Override
     public void addToForo(int idForo, Comentario c) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntradaForoMapper foromapper = currentSession.getMapper(EntradaForoMapper.class);
+        foromapper.agregarComentarioAEntradaForo(idForo, c);
     }
     
 }
