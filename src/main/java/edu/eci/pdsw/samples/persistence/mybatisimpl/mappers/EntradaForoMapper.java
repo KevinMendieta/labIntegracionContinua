@@ -34,5 +34,5 @@ public interface EntradaForoMapper {
     
     public void agregarComentarioAEntradaForo(@Param("identrada")int idEntradaForo,@Param("cometario")Comentario c);
     
-    
+    public void agregarEntradaForo(@Param("entradaForo") EntradaForo ef);
 }

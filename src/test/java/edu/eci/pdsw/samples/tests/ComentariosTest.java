@@ -47,23 +47,21 @@ public class ComentariosTest {
     }
      @Test
      public void registroPacineteTestC1() throws ExcepcionServiciosForos  {
-         Comentario com= new Comentario();
-          try{
-         nuevo.agregarRespuestaForo(0, com);
-         assertTrue("No ingresa excepcion",false);
+        Comentario com= new Comentario();
+        try{
+            nuevo.agregarRespuestaForo(0, com);
+            fail("No ingresa excepcion");
         }catch(ExcepcionServiciosForos e){
-            assertTrue("el comentario no tiene un usuario asociado",true);
         }
     }    
     @Test
      public void registroPacineteTestC2() throws ExcepcionServiciosForos{
-         Usuario us=new Usuario();
-         Comentario com= new Comentario();
-         try{
-         nuevo.consultarEntradaForo(-1);
-           assertTrue("No ingresa excepcion",false);
+        Usuario us=new Usuario();
+        Comentario com= new Comentario();
+        try{
+            nuevo.consultarEntradaForo(-1);
+            fail("No ingresa excepcion");
         }catch(ExcepcionServiciosForos e){
-            assertTrue("El id asociado no corresponde a ningun usuario que realizo el comentario",true);
         }
     } 
 }

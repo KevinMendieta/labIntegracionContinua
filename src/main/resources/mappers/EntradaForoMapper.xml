@@ -50,4 +50,9 @@
         VALUES (#{comentario.getFechayHora()},#{comentario.getContenido()},#{identrada},#{comentario.getAutor().getEmail()})
     </insert>
     
+    <insert id="agregarEntradaForo" parameterType="map">
+        INSERT INTO ENTRADAS_FOROS (id,fecha_hora,contenido,usuarios_email)
+        VALUES (#{entradaForo.getIdentificador()},#{entradaForo.getFechayHora()},#{entradaForo.getComentario()},#{entradaForo.getAutor().getEmail()})
+    </insert>
+    
 </mapper>
