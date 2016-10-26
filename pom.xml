@@ -9,7 +9,7 @@
     <name>ServiciosForo-DAO</name>
     
     <properties>
-        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <endorsed.dir>${project.build.directory}/dependency</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
