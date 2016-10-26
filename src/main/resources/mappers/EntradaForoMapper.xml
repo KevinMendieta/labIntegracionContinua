@@ -51,8 +51,8 @@
     </insert>
     
     <insert id="agregarEntradaForo" parameterType="map">
-        INSERT INTO ENTRADAS_FOROS (id,fecha_hora,contenido,usuarios_email)
-        VALUES (#{entradaForo.getIdentificador()},#{entradaForo.getFechayHora()},#{entradaForo.getComentario()},#{entradaForo.getAutor().getEmail()})
+        INSERT INTO ENTRADAS_FOROS (id,fecha_hora,contenido,USUARIOS_email)
+        VALUES (#{entradaForo.identificador},#{entradaForo.fechayHora},#{entradaForo.comentario},#{entradaForo.autor.email})
     </insert>
     
 </mapper>

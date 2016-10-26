@@ -50,7 +50,7 @@ public class EntradasForoTest {
     @Test
     public void registroEntradaTestCE1(){
         try{
-            sfs.registrarNuevaEntradaForo(new EntradaForo(0,new Usuario("a@as.com","sadas"),"asd","asd",new Date(java.util.Calendar.getInstance().getTime().getTime())));
+            sfs.registrarNuevaEntradaForo(new EntradaForo(0,new Usuario("pedro.perez@gmail.com","Pedro Perez"),"asd","asd",new Date(java.util.Calendar.getInstance().getTime().getTime())));
         }catch(ExcepcionServiciosForos e){
             fail();
         }

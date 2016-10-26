@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head></h:head>
+    <h:body>
+        <h:form id="form">
+            <p:dataTable id="tablaForos" var="foros" value="#{registroForoBean.entradasForo}" 
+                         selectionMode="single" selection="#{registroForoBean.selecc}" rowKey="#{foros.identificador}">     
+                <p:ajax event="rowSelect" update=":form" />
+                <f:facet name="header">
+                    Foros
+                </f:facet>
+                <p:column headerText="Identificadores">
+                    <h:outputText value="#{foros.identificador}" />
+                </p:column>
+                <p:column headerText="Autores">
+                    <h:outputText value="#{foros.autor.nombre}" />
+                </p:column>
+                <p:column headerText="Titulos">
+                    <h:outputText value="#{foros.titulo}" />
+                </p:column>
+                <p:column headerText="Comentarios">
+                    <h:outputText value="#{foros.comentario}" />
+                </p:column>
+                <p:column headerText="Fechas">
+                    <h:outputText value="#{foros.fechayHora}" />
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="Agregar una Entrada" oncomplete="PF('campoEntradaDatos').show()" />
+                    <p:commandButton update=":form" value="Ver" action="registrorespuestaforo" immediate="true"/>
+                </f:facet>
+            </p:dataTable>
+            <p:dialog header="Datos" widgetVar="campoEntradaDatos" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="500">
+                <p:outputPanel id="inputQuantity" style="text-align:center;">
+                    <h:outputText value="Complete sus datos porfavor"/>
+                    <h:panelGrid columns="2" cellpadding="1" styleClass="ui-grid">
+                        
+                        <h:outputLabel for="nombre" value="nombre: " />
+                        <h:inputText id="nombre" value="#{registroForoBean.autorUsuario}" required="true"/> 
+                        
+                        <h:outputLabel for="email" value="email: " />
+                        <h:inputText id="email" value="#{registroForoBean.emailActual}" required="true"/>
+                        
+                        <h:outputLabel for="titulo" value="titulo: " />
+                        <h:inputText id="titulo" value="#{registroForoBean.tituloIni}" required="true"/>
+                        
+                        <h:outputLabel for="comentario" value="comentario: " />
+                        <h:inputText id="comentario" value="#{registroForoBean.comenta}" required="true"/>
+                        
+                    </h:panelGrid>
+                    <p:commandButton update=":form" value="Agregar entrada" actionListener="#{registroForoBean.adicionar()}"/>
+                    
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

@@ -45,7 +45,7 @@ public class RegistroForosBean implements Serializable {
     public void adicionar() throws ExcepcionServiciosForos{
         Date fecha = new Date(java.util.Calendar.getInstance().getTime().getTime());
         Usuario usuario = new Usuario(emailActual,autorUsuario);
-        EntradaForo adicion = new  EntradaForo(sp.consultarEntradasForo().size(),usuario,comenta,tituloIni,fecha);
+        EntradaForo adicion = new  EntradaForo(sp.consultarEntradasForo().size()+1,usuario,comenta,tituloIni,fecha);
         sp.registrarNuevaEntradaForo(adicion);
     }
     
